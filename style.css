@@ -1,0 +1,9 @@
+.body {
+	width: 350px;
+	height: 600px;
+	background: #ccc;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 10px;
+}
