@@ -2,11 +2,14 @@ const result = document.querySelector('#result'),
       expression = document.querySelector('#expression'),
       num = document.querySelectorAll('.number:not(.equals)'),
       operation = document.querySelectorAll('.operation'),
+      sOperation = document.querySelectorAll('.operation'),
       equals = document.querySelector('.equals'),
-      clear = document.querySelector('#clear'),
-      ce = document.querySelector('#ce');
+      clear = document.querySelector('#AC'),
+      earse = document.querySelector('#earse');
+      prc = document.querySelector('#prc');
+      inv = document.querySelector('#signInv')
 let ex = ''; // the expression string to be eval'd
-result.innerHTML = '';
+result.innerHTML = '0';
 
 
 
@@ -18,7 +21,7 @@ function clickN() { // when we click on a number
     expression.innerHTML += this.id;
     ex += this.id;
   }
-  result.innerHTML = ex.split(/\/|\*|\+|-|=/).pop();
+  //result.innerHTML = ex.split(/\/|\*|\+|-|=/).pop();
   checkLength(result.innerHTML);
 };
 
@@ -32,10 +35,35 @@ function clickO() { // when we click on an operation
   } 
   expression.innerHTML = expression.innerHTML.replace(/=/, '') + this.id;
   ex += this.id;
-  result.innerHTML = this.id;
+  //result.innerHTML = this.id;
 };
 
+function clickPrc() { // when we click on % button
+  if(!ex) {
+    return;
+  }
+  result.innerHTML = expression.innerHTML/100;
+  ex = ex.toString().replace(/=/, '');
+  expression.innerHTML = expression.innerHTML.replace(/=/, '') + '%';
+  ex += '%';
+};
 
+function signInvert() { // when we click on sign inversion button
+    if(!ex) {
+    return;
+  }
+  ex = ex.toString().replace(/=/, '');
+  if (ex.match(/\/|\*|\+|-|=/)) {
+    ex = eval(ex).toString();
+  } 
+  expression.innerHTML = expression.innerHTML.replace(/=/, '') * -1;
+  ex = '-'+ex;
+  //result.innerHTML = this.id;
+}
+
+prc.addEventListener('click', clickPrc);
+
+signInv.addEventListener('click', signInvert);
 
 Array.from(num).forEach(function(element) { // assign appropriate function to all numbers and operations
       element.addEventListener('click', clickN);
@@ -47,24 +75,18 @@ Array.from(operation).forEach(function(element) {
 
 // clear all on click
 clear.addEventListener('click', () => {
-  result.innerHTML = '';
-  expression.innerHTML = '';
+  result.innerHTML = '0';
+  expression.innerHTML = '0';
   ex = '';
 })
 
 // clear last entry on click
-ce.addEventListener('click', () => {
+earse.addEventListener('click', () => {
   if (!expression.innerHTML.match(/=$/)) {
     
-    expression.innerHTML = doCE(expression.innerHTML);
-    ex = doCE(ex); 
+    expression.innerHTML = expression.innerHTML.slice(0, -1);
+    ex = ex.slice(0, -1); 
     result.innerHTML = 0;
-    
-    function doCE(arg) {
-      arg = arg.split(/([\/\*\+\-\=])/g);
-      arg.splice(-1, 1);
-      return arg.join('');
-    }
   }
 })
 
@@ -74,6 +96,7 @@ equals.addEventListener('click', ()=> {
     result.innerHTML = '0';
   } else {
     ex = eval(ex);
+      if(!expression.innerHTML.match('='))
     expression.innerHTML += '=';
     result.innerHTML = trim12(ex);
   }

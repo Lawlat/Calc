@@ -22,13 +22,13 @@
 
 #result {
 	height: 50px;
+	color: #ffa500;
 	font-size: 3em;
 }
 
 #expression {
 	height: 50px;
 	font-size: 3em;
-	color: #ffa500;
 	overflow: hidden;
 }
 
