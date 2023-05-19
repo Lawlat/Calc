@@ -4,6 +4,50 @@
 	background: #ccc;
 	margin: auto;
 	display: flex;
-	flex-wrap: wrap;
-	border-radius: 10px;
+	flex-direction: column;
+	/*flex-wrap: wrap;*/
+	justify-content: space-around;
+	border-radius: 35px;
+}
+
+.results {
+	width: 93%;
+	margin: 20px auto;
+	text-align: right;
+	/*background: #aaa;*/
+}
+
+#expression, #result {
+ 	background: #aaa;
+	padding-right: 5px;
+}
+
+#result {
+	height: 50px;
+	font-size: 3em;
+}
+
+#expression {
+	height: 50px;
+	font-size: 3em;
+	color: #ffa500;
+	overflow: hidden;
+}
+
+.buttons {
+	display: grid;
+	flex-grow: 2;
+	grid-template-columns: repeat(4, 1fr);
+	width: 93%;
+	margin: 20px auto;
+	padding: 10px;
+}
+
+.button, .right-button {
+	border-radius: 50%;
+	margin: 7%;
+}
+
+.right-button	{
+	background: #ffa500;
 }
